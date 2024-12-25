@@ -76,7 +76,7 @@
         <h1>Thomasson Family Game Collection</h1>
         <form id="fileForm">
             <input type="file" id="uploadFile" accept=".xlsx, .xls">
-            <input type="text" id="newName" placeholder="Enter a new name">
+            <input type="text" id="newName" placeholder="Enter a new game title">
             <button type="button" onclick="modifyExcel()">Modify Excel</button>
         </form>
         <div id="output" class="output"></div>
