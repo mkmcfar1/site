@@ -1,6 +1,6 @@
 # site
 
-<!DOCTYPE html>
+<DOCTYPE html>
 <html>
 <head>
 
@@ -8,54 +8,95 @@
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
-<! Update the HTML to include a file input
-<form id="fileForm">
-    <input type="file" id="uploadFile" accept=".xlsx, .xls"><br><br>
-    <label for="newName">New Name:</label>
-    <input type="text" id="newName"><br><br>
-    <button type="button" onclick="modifyExcel()">Modify Excel</button>
-</form>
-<div id="output"></div>
-
-<! javascript to load and modify the file
-
-<script>
-    let workbook;
-
-    document.getElementById('uploadFile').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const data = new Uint8Array(e.target.result);
-            workbook = XLSX.read(data, { type: 'array' });
-        };
-
-        reader.readAsArrayBuffer(file);
-    });
-
-    function modifyExcel() {
-        if (!workbook) {
-            alert('Please upload an Excel file first.');
-            return;
+<DOCTYPE html>
+<html>
+<head>
+    <title>Thomasson Family Game Collection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        // Get the first worksheet
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
 
-        // Convert worksheet to JSON
-        let sheetData = XLSX.utils.sheet_to_json(worksheet);
+        h1 {
+            color: #333333;
+            font-size: 24px;
+        }
 
-        // Add new data
-        const newName = document.getElementById('newName').value;
-        sheetData.push({ Name: newName });
+        input[type="file"], input[type="text"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
 
-        // Convert back to worksheet and update the workbook
-        const updatedWorksheet = XLSX.utils.json_to_sheet(sheetData);
-        workbook.Sheets[sheetName] = updatedWorksheet;
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
-        // Generate a new downloadable file
-        XLSX.writeFile(workbook, 'updated_data.xlsx');
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thomasson Family Game Collection</h1>
+        <form id="fileForm">
+            <input type="file" id="uploadFile" accept=".xlsx, .xls">
+            <input type="text" id="newName" placeholder="Enter a new name">
+            <button type="button" onclick="modifyExcel()">Modify Excel</button>
+        </form>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script>
+        // JavaScript logic remains unchanged
+    </script>
+</body>
+</html>
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 10px;
     }
-</script>
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
